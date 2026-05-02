@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: "pl"
+
+collections:
+  - name: "menu"
+    label: "Menu restauracji"
+    files:
+      - file: "data/menu.json"
+        label: "Pozycje menu"
+        name: "menu_items"
+        fields:
+          - label: "Pozycje"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.price}} zł"
+            fields:
+              - { label: "Sekcja", name: "section", widget: "select", options: ["Śniadania", "Menu główne", "Napoje", "Alkohole"] }
+              - { label: "Kategoria", name: "category", widget: "string" }
+              - { label: "Nazwa", name: "name", widget: "string" }
+              - { label: "Cena", name: "price", widget: "string", hint: "Np. 29,00 — bez dopisku zł" }
+              - { label: "Opis", name: "description", widget: "text", required: false }
+              - { label: "Zdjęcie", name: "image", widget: "image", required: false, hint: "Możesz dodać później. Bez zdjęcia pojawi się komunikat: Zdjęcie wkrótce." }
