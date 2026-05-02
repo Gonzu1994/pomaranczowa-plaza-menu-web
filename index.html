@@ -7,82 +7,588 @@
   <meta name="description" content="Menu online restauracji Pomarańczowa Plaża" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
-    :root{--orange:#f58220;--dark:#1f1f1f;--muted:#6b625c;--bg:#fff7ed;--card:#fff;--line:#f3d8bd;--shadow:0 12px 30px rgba(31,31,31,.08)}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--dark)}
-    header{position:sticky;top:0;z-index:10;background:rgba(255,247,237,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-    .wrap{max-width:1180px;margin:0 auto;padding:18px}
-    .brand{display:flex;gap:14px;align-items:center}.logo{width:52px;height:52px;border-radius:18px;background:var(--orange);display:grid;place-items:center;color:#fff;font-weight:900;font-size:24px;box-shadow:var(--shadow)}
-    h1{margin:0;font-size:26px;line-height:1.05}.lead{margin:5px 0 0;color:var(--muted);font-size:14px}.notice{font-size:13px;line-height:1.5;color:#544b45;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-top:14px}
-    .tabs,.cats{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px}.tab,.cat{border:0;white-space:nowrap;border-radius:999px;padding:10px 15px;background:#fff;color:#3b342f;box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-weight:650}.tab.active{background:var(--orange);color:#fff;box-shadow:none}.cat.active{background:#222;color:#fff;box-shadow:none}
-    .searchrow{display:grid;grid-template-columns:1fr;gap:10px;margin-top:8px}@media(min-width:800px){.searchrow{grid-template-columns:360px 1fr;align-items:start}}
-    input[type=search]{width:100%;border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px 15px;font-size:16px;outline:none} input[type=search]:focus{border-color:var(--orange)}
-    main{max-width:1180px;margin:0 auto;padding:22px 18px 50px}.grid{display:grid;gap:15px}@media(min-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1020px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 5px 16px rgba(0,0,0,.04);cursor:pointer;text-align:left;transition:.18s transform,.18s box-shadow}.card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-    .photo{height:190px;background:#ead6c2;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block}.missing img{opacity:.35}.badge-missing{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:800;color:#312b27}.badge-missing span{background:rgba(255,255,255,.88);border-radius:999px;padding:9px 13px;box-shadow:0 8px 20px rgba(0,0,0,.09)}
-    .content{padding:17px}.meta{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.category{font-size:12px;color:var(--orange);font-weight:900;text-transform:uppercase;letter-spacing:.04em}.name{margin:4px 0 0;font-size:18px;font-weight:850;line-height:1.16}.price{background:#fff0df;color:#7a3a00;border-radius:999px;padding:7px 10px;font-weight:900;white-space:nowrap}.desc{color:var(--muted);font-size:14px;line-height:1.45;margin:12px 0 0}.click{font-size:13px;font-weight:800;margin-top:14px}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99;display:none;align-items:end;justify-content:center;padding:12px}.modal.open{display:flex}@media(min-width:760px){.modal{align-items:center}}
-    .dialog{background:#fff;width:min(720px,100%);max-height:92vh;overflow:auto;border-radius:28px;box-shadow:0 25px 80px rgba(0,0,0,.32);position:relative}.close{position:absolute;right:14px;top:14px;border:0;border-radius:999px;background:rgba(255,255,255,.92);width:42px;height:42px;font-size:26px;line-height:1;cursor:pointer;z-index:1}.modal-photo{height:340px;background:#ead6c2;position:relative}.modal-photo img{width:100%;height:100%;object-fit:cover}.dialog-body{padding:22px}.dialog h2{font-size:28px;margin:5px 0 0}.dialog .desc{font-size:16px;line-height:1.6}.empty{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;text-align:center;color:var(--muted)}
-    footer{max-width:1180px;margin:0 auto;padding:0 18px 34px;color:var(--muted);font-size:13px;line-height:1.5}.adminlink{color:#7a3a00;font-weight:800;text-decoration:none}
+    :root {
+      --orange: #f58220;
+      --dark: #1f1f1f;
+      --muted: #6b625c;
+      --bg: #fff7ed;
+      --card: #fff;
+      --line: #f3d8bd;
+      --shadow: 0 12px 30px rgba(31,31,31,.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,247,237,.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .brand-logo {
+      width: 340px;
+      max-width: 88vw;
+      height: auto;
+      display: block;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .notice {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #544b45;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+
+    .tabs,
+    .cats {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 0 2px;
+    }
+
+    .tab,
+    .cat {
+      border: 0;
+      white-space: nowrap;
+      border-radius: 999px;
+      padding: 10px 15px;
+      background: #fff;
+      color: #3b342f;
+      box-shadow: inset 0 0 0 1px var(--line);
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .tab.active {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .cat.active {
+      background: #222;
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .searchrow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 800px) {
+      .searchrow {
+        grid-template-columns: 360px 1fr;
+        align-items: start;
+      }
+
+      .brand {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .lead {
+        text-align: right;
+        max-width: 360px;
+      }
+    }
+
+    input[type=search] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      padding: 13px 15px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type=search]:focus {
+      border-color: var(--orange);
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px 18px 50px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 15px;
+    }
+
+    @media (min-width: 680px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1020px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 5px 16px rgba(0,0,0,.04);
+      cursor: pointer;
+      text-align: left;
+      transition: .18s transform, .18s box-shadow;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .photo {
+      height: 190px;
+      background: #ead6c2;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .missing img {
+      opacity: .35;
+    }
+
+    .badge-missing {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 800;
+      color: #312b27;
+    }
+
+    .badge-missing span {
+      background: rgba(255,255,255,.88);
+      border-radius: 999px;
+      padding: 9px 13px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.09);
+    }
+
+    .content {
+      padding: 17px;
+    }
+
+    .meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .category {
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .name {
+      margin: 4px 0 0;
+      font-size: 18px;
+      font-weight: 850;
+      line-height: 1.16;
+    }
+
+    .price {
+      background: #fff0df;
+      color: #7a3a00;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      margin: 12px 0 0;
+    }
+
+    .click {
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 14px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 99;
+      display: none;
+      align-items: end;
+      justify-content: center;
+      padding: 12px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    @media (min-width: 760px) {
+      .modal {
+        align-items: center;
+      }
+    }
+
+    .dialog {
+      background: #fff;
+      width: min(720px,100%);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 28px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.32);
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      width: 42px;
+      height: 42px;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .modal-photo {
+      height: 340px;
+      background: #ead6c2;
+      position: relative;
+    }
+
+    .modal-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dialog-body {
+      padding: 22px;
+    }
+
+    .dialog h2 {
+      font-size: 28px;
+      margin: 5px 0 0;
+    }
+
+    .dialog .desc {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .empty {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 18px 34px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .adminlink {
+      color: #7a3a00;
+      font-weight: 800;
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
-  <header><div class="wrap">
-    <div class="brand"><div class="logo">PP</div><div><h1>Pomarańczowa Plaża</h1><p class="lead">Menu online — kliknij pozycję, aby zobaczyć zdjęcie i szczegóły</p></div></div>
-    <p class="notice">Zdjęcia można dodawać stopniowo. Pozycje bez zdjęcia pokazują komunikat „Zdjęcie wkrótce”.</p>
-    <div id="sections" class="tabs"></div>
-    <div class="searchrow"><input id="search" type="search" placeholder="Szukaj dania, składnika albo kategorii…" /><div id="categories" class="cats"></div></div>
-  </div></header>
-  <main><div id="menu" class="grid"></div></main>
-  <div id="modal" class="modal" aria-hidden="true"><div class="dialog"><button class="close" id="close" aria-label="Zamknij">×</button><div id="modalPhoto" class="modal-photo"></div><div class="dialog-body"><div id="modalCat" class="category"></div><div class="meta"><h2 id="modalName"></h2><div id="modalPrice" class="price"></div></div><p id="modalDesc" class="desc"></p></div></div></div>
-  <footer><p>Kuchnia rzemieślnicza z widokiem na morze. Średni czas oczekiwania może wynosić 20–40 minut i wydłużyć się w weekendy oraz święta. Tabela alergenów i gramatur dostępna u obsługi.</p><p><a class="adminlink" href="/admin/">Panel edycji menu</a></p></footer>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="brand-logo-wrap">
+          <img
+            src="/logo-pomaranczowa-plaza-web.png"
+            alt="Pomarańczowa Plaża Restauracja & Hotel"
+            class="brand-logo"
+          />
+        </div>
+
+        <p class="lead">Menu online — kliknij pozycję, aby zobaczyć zdjęcie i szczegóły</p>
+      </div>
+
+      <p class="notice">Zdjęcia można dodawać stopniowo. Pozycje bez zdjęcia pokazują komunikat „Zdjęcie wkrótce”.</p>
+
+      <div id="sections" class="tabs"></div>
+
+      <div class="searchrow">
+        <input id="search" type="search" placeholder="Szukaj dania, składnika albo kategorii…" />
+        <div id="categories" class="cats"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="menu" class="grid"></div>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="dialog">
+      <button class="close" id="close" aria-label="Zamknij">×</button>
+      <div id="modalPhoto" class="modal-photo"></div>
+      <div class="dialog-body">
+        <div id="modalCat" class="category"></div>
+        <div class="meta">
+          <h2 id="modalName"></h2>
+          <div id="modalPrice" class="price"></div>
+        </div>
+        <p id="modalDesc" class="desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Kuchnia rzemieślnicza z widokiem na morze. Średni czas oczekiwania może wynosić 20–40 minut i wydłużyć się w weekendy oraz święta. Tabela alergenów i gramatur dostępna u obsługi.</p>
+    <p><a class="adminlink" href="/admin/">Panel edycji menu</a></p>
+  </footer>
+
 <script>
 const placeholder = 'https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&w=1200&q=80';
-let items=[], activeSection='Wszystkie', activeCategory='Wszystkie', query='';
-const $ = (id)=>document.getElementById(id);
-function safeText(v){return String(v||'').trim()}
-function imageUrl(item){return safeText(item.image) || placeholder}
-function hasPhoto(item){return Boolean(safeText(item.image))}
-function unique(arr){return [...new Set(arr.filter(Boolean))]}
-async function load(){
+
+let items = [];
+let activeSection = 'Wszystkie';
+let activeCategory = 'Wszystkie';
+let query = '';
+
+const $ = (id) => document.getElementById(id);
+
+function safeText(v) {
+  return String(v || '').trim();
+}
+
+function imageUrl(item) {
+  return safeText(item.image) || placeholder;
+}
+
+function hasPhoto(item) {
+  return Boolean(safeText(item.image));
+}
+
+function unique(arr) {
+  return [...new Set(arr.filter(Boolean))];
+}
+
+async function load() {
   const res = await fetch('/data/menu.json?v=' + Date.now());
   const data = await res.json();
   items = data.items || [];
-  renderFilters(); renderMenu();
+  renderFilters();
+  renderMenu();
 }
-function renderFilters(){
-  const sections=['Wszystkie',...unique(items.map(i=>i.section))];
-  $('sections').innerHTML=sections.map(s=>`<button class="tab ${s===activeSection?'active':''}" data-section="${s}">${s}</button>`).join('');
-  $('sections').querySelectorAll('button').forEach(b=>b.onclick=()=>{activeSection=b.dataset.section;activeCategory='Wszystkie';renderFilters();renderMenu();});
-  const pool=activeSection==='Wszystkie'?items:items.filter(i=>i.section===activeSection);
-  const cats=['Wszystkie',...unique(pool.map(i=>i.category))];
-  $('categories').innerHTML=cats.map(c=>`<button class="cat ${c===activeCategory?'active':''}" data-category="${c}">${c}</button>`).join('');
-  $('categories').querySelectorAll('button').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.category;renderFilters();renderMenu();});
+
+function renderFilters() {
+  const sections = ['Wszystkie', ...unique(items.map(i => i.section))];
+
+  $('sections').innerHTML = sections
+    .map(s => `<button class="tab ${s === activeSection ? 'active' : ''}" data-section="${s}">${s}</button>`)
+    .join('');
+
+  $('sections').querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      activeSection = b.dataset.section;
+      activeCategory = 'Wszystkie';
+      renderFilters();
+      renderMenu();
+    };
+  });
+
+  const pool = activeSection === 'Wszystkie'
+    ? items
+    : items.filter(i => i.section === activeSection);
+
+  const cats = ['Wszystkie', ...unique(pool.map(i => i.category))];
+
+  $('categories').innerHTML = cats
+    .map(c => `<button class="cat ${c === activeCategory ? 'active' : ''}" data-category="${c}">${c}</button>`)
+    .join('');
+
+  $('categories').querySelectorAll('button').forEach(b => {
+    b.onclick = () => {
+      activeCategory = b.dataset.category;
+      renderFilters();
+      renderMenu();
+    };
+  });
 }
-function filtered(){
-  const q=query.toLowerCase();
-  return items.filter(i=>{
-    const inSection=activeSection==='Wszystkie'||i.section===activeSection;
-    const inCat=activeCategory==='Wszystkie'||i.category===activeCategory;
-    const inQ=!q || [i.name,i.description,i.category,i.section].join(' ').toLowerCase().includes(q);
+
+function filtered() {
+  const q = query.toLowerCase();
+
+  return items.filter(i => {
+    const inSection = activeSection === 'Wszystkie' || i.section === activeSection;
+    const inCat = activeCategory === 'Wszystkie' || i.category === activeCategory;
+    const inQ = !q || [i.name, i.description, i.category, i.section].join(' ').toLowerCase().includes(q);
+
     return inSection && inCat && inQ;
   });
 }
-function renderMenu(){
-  const list=filtered();
-  if(!list.length){$('menu').className=''; $('menu').innerHTML='<div class="empty">Brak pozycji dla wybranych filtrów.</div>'; return;}
-  $('menu').className='grid';
-  $('menu').innerHTML=list.map((item,idx)=>`<article class="card" data-idx="${items.indexOf(item)}"><div class="photo ${hasPhoto(item)?'':'missing'}"><img src="${imageUrl(item)}" alt="${safeText(item.name)}" loading="lazy" />${hasPhoto(item)?'':'<div class="badge-missing"><span>Zdjęcie wkrótce</span></div>'}</div><div class="content"><div class="meta"><div><div class="category">${safeText(item.category)}</div><div class="name">${safeText(item.name)}</div></div><div class="price">${safeText(item.price)} zł</div></div><p class="desc">${safeText(item.description)}</p><div class="click">Kliknij, aby zobaczyć szczegóły</div></div></article>`).join('');
-  $('menu').querySelectorAll('.card').forEach(card=>card.onclick=()=>openModal(items[Number(card.dataset.idx)]));
+
+function renderMenu() {
+  const list = filtered();
+
+  if (!list.length) {
+    $('menu').className = '';
+    $('menu').innerHTML = '<div class="empty">Brak pozycji dla wybranych filtrów.</div>';
+    return;
+  }
+
+  $('menu').className = 'grid';
+
+  $('menu').innerHTML = list.map((item) => `
+    <article class="card" data-idx="${items.indexOf(item)}">
+      <div class="photo ${hasPhoto(item) ? '' : 'missing'}">
+        <img src="${imageUrl(item)}" alt="${safeText(item.name)}" loading="lazy" />
+        ${hasPhoto(item) ? '' : '<div class="badge-missing"><span>Zdjęcie wkrótce</span></div>'}
+      </div>
+
+      <div class="content">
+        <div class="meta">
+          <div>
+            <div class="category">${safeText(item.category)}</div>
+            <div class="name">${safeText(item.name)}</div>
+          </div>
+          <div class="price">${safeText(item.price)} zł</div>
+        </div>
+
+        <p class="desc">${safeText(item.description)}</p>
+        <div class="click">Kliknij, aby zobaczyć szczegóły</div>
+      </div>
+    </article>
+  `).join('');
+
+  $('menu').querySelectorAll('.card').forEach(card => {
+    card.onclick = () => openModal(items[Number(card.dataset.idx)]);
+  });
 }
-function openModal(item){
-  $('modalName').textContent=safeText(item.name); $('modalPrice').textContent=safeText(item.price)+' zł'; $('modalCat').textContent=safeText(item.section)+' / '+safeText(item.category); $('modalDesc').textContent=safeText(item.description);
-  $('modalPhoto').innerHTML=`<img class="${hasPhoto(item)?'':'missing'}" src="${imageUrl(item)}" alt="${safeText(item.name)}" />${hasPhoto(item)?'':'<div class="badge-missing"><span>Zdjęcie wkrótce</span></div>'}`;
-  $('modal').classList.add('open'); $('modal').setAttribute('aria-hidden','false');
+
+function openModal(item) {
+  $('modalName').textContent = safeText(item.name);
+  $('modalPrice').textContent = safeText(item.price) + ' zł';
+  $('modalCat').textContent = safeText(item.section) + ' / ' + safeText(item.category);
+  $('modalDesc').textContent = safeText(item.description);
+
+  $('modalPhoto').innerHTML = `
+    <img class="${hasPhoto(item) ? '' : 'missing'}" src="${imageUrl(item)}" alt="${safeText(item.name)}" />
+    ${hasPhoto(item) ? '' : '<div class="badge-missing"><span>Zdjęcie wkrótce</span></div>'}
+  `;
+
+  $('modal').classList.add('open');
+  $('modal').setAttribute('aria-hidden', 'false');
 }
-function closeModal(){ $('modal').classList.remove('open'); $('modal').setAttribute('aria-hidden','true'); }
-$('close').onclick=closeModal; $('modal').onclick=(e)=>{if(e.target===$('modal')) closeModal()}; document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal()}); $('search').oninput=(e)=>{query=e.target.value; renderMenu()};
-if (window.netlifyIdentity) { window.netlifyIdentity.on('init', user => { if (!user && window.location.hash.includes('invite_token')) window.netlifyIdentity.open('signup'); }); }
-load().catch(err=>{$('menu').className='';$('menu').innerHTML='<div class="empty">Nie udało się wczytać menu. Sprawdź plik data/menu.json.</div>';console.error(err)});
+
+function closeModal() {
+  $('modal').classList.remove('open');
+  $('modal').setAttribute('aria-hidden', 'true');
+}
+
+$('close').onclick = closeModal;
+
+$('modal').onclick = (e) => {
+  if (e.target === $('modal')) closeModal();
+};
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+$('search').oninput = (e) => {
+  query = e.target.value;
+  renderMenu();
+};
+
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', user => {
+    if (!user && window.location.hash.includes('invite_token')) {
+      window.netlifyIdentity.open('signup');
+    }
+  });
+}
+
+load().catch(err => {
+  $('menu').className = '';
+  $('menu').innerHTML = '<div class="empty">Nie udało się wczytać menu. Sprawdź plik data/menu.json.</div>';
+  console.error(err);
+});
 </script>
 </body>
 </html>
